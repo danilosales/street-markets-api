@@ -10,10 +10,10 @@ import (
 type Conf struct {
 	LogLevel string
 	Port     int
-	Db       dbConf
+	Db       DbConf
 }
 
-type dbConf struct {
+type DbConf struct {
 	Host     string
 	Port     int
 	Username string
@@ -28,7 +28,7 @@ var defaultValues = map[string]string{
 	"DB_HOST":   "localhost",
 	"DB_USER":   "postgres",
 	"DB_PASS":   "postgres",
-	"DB_NAME":   "markets",
+	"DB_NAME":   "street-markets",
 }
 
 func AppConfig() *Conf {
@@ -48,8 +48,8 @@ func AppConfig() *Conf {
 	return &c
 }
 
-func dbConfig() *dbConf {
-	c := dbConf{
+func dbConfig() *DbConf {
+	c := DbConf{
 		Host:     getValue("DB_HOST"),
 		Username: getValue("DB_USER"),
 		Password: getValue("DB_PASS"),

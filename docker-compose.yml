@@ -12,6 +12,8 @@ services:
       - ./docker/postgres/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
       - ./docker/postgres/DEINFO_AB_FEIRASLIVRES_2014.csv:/tmp/DEINFO_AB_FEIRASLIVRES_2014.csv
       - ./docker/postgres/import_csv.sql:/docker-entrypoint-initdb.d/import_csv.sql
+    networks:
+      - api-street-markets
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -22,3 +24,9 @@ services:
       - "54321:80"
     depends_on:
       - postgres
+    networks:
+      - api-street-markets  
+
+networks:
+  api-street-markets:
+    driver: bridge      
