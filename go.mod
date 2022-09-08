@@ -6,6 +6,8 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/rs/zerolog v1.28.0
 	github.com/stretchr/testify v1.8.0
+	github.com/swaggo/files v0.0.0-20220728132757-551d4a08d97a
+	github.com/swaggo/gin-swagger v1.5.3
 	github.com/swaggo/swag v1.8.5
 	gopkg.in/validator.v2 v2.0.1
 	gorm.io/driver/postgres v1.3.9
@@ -47,7 +49,7 @@ require (
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90 // indirect
 	golang.org/x/net v0.0.0-20220907135653-1e95f45603a7 // indirect
-	golang.org/x/sys v0.0.0-20220907062415-87db552b00fd // indirect
+	golang.org/x/sys v0.0.0-20220908150016-7ac13a9a928d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect

@@ -51,6 +51,14 @@ func new(logLevel string, w io.Writer) *Logger {
 
 }
 
+// Err starts a new message with error level with err as a field if not nil or
+// with info level if err is nil.
+//
+// You must call Msg on the returned event in order to send the event.
+func (l *Logger) Err(err error) *zerolog.Event {
+	return l.logger.Err(err)
+}
+
 // Trace starts a new message with trace level.
 //
 // You must call Msg on the returned event in order to send the event.

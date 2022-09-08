@@ -1,0 +1,206 @@
+definitions:
+  model.StreetMarket:
+    properties:
+      areap:
+        type: string
+      bairro:
+        type: string
+      coddist:
+        type: integer
+      codsubpref:
+        type: integer
+      distrito:
+        type: string
+      id:
+        type: integer
+      lat:
+        type: string
+      logradouro:
+        type: string
+      long:
+        type: string
+      nomeFeira:
+        type: string
+      numero:
+        type: string
+      referencia:
+        type: string
+      regiao5:
+        type: string
+      regiao8:
+        type: string
+      registro:
+        type: string
+      setcens:
+        type: string
+      subprefe:
+        type: string
+    type: object
+  model.StreetMarketDto:
+    properties:
+      areap:
+        type: string
+      bairro:
+        maxLength: 20
+        type: string
+      coddist:
+        type: integer
+      codsubpref:
+        type: integer
+      distrito:
+        type: string
+      lat:
+        type: string
+      logradouro:
+        type: string
+      long:
+        type: string
+      nome_feira:
+        type: string
+      numero:
+        maxLength: 5
+        type: string
+      referencia:
+        maxLength: 60
+        type: string
+      regiao5:
+        type: string
+      regiao8:
+        type: string
+      registro:
+        type: string
+      setcens:
+        type: string
+      subprefe:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /street-markets:
+    get:
+      description: Search a Market by distrito, regiao5, nome or bairro
+      parameters:
+      - description: Street Market Distrito
+        in: query
+        name: distrito
+        type: string
+      - description: Street Market Regiao5
+        in: query
+        name: regiao5
+        type: string
+      - description: Street Market Name
+        in: query
+        name: nome
+        type: string
+      - description: Street Market Bairro
+        in: query
+        name: bairro
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/model.StreetMarket'
+            type: array
+        "204":
+          description: Can not find a Street Market with parameters
+      summary: Search a Street Market
+      tags:
+      - Street Market
+    post:
+      consumes:
+      - application/json
+      description: Create a Street Market
+      parameters:
+      - description: Street Market
+        in: body
+        name: market
+        required: true
+        schema:
+          $ref: '#/definitions/model.StreetMarketDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.StreetMarketDto'
+        "400":
+          description: Invalid Request
+      summary: Create a Street Market
+      tags:
+      - Street Market
+  /street-markets/{code}:
+    delete:
+      description: Delete a Market by register Code
+      parameters:
+      - description: Street Market Register Code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ok
+          schema:
+            $ref: '#/definitions/model.StreetMarketDto'
+        "404":
+          description: Can not find a Street Market with this Register Code
+      summary: Delete a Street Market by Register Code
+      tags:
+      - Street Market
+    get:
+      description: Search a Market by register Code
+      parameters:
+      - description: Street Market Register Code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/model.StreetMarketDto'
+        "404":
+          description: Can not find a Street Market with this Register Code
+      summary: Get a Street Market by Register Code
+      tags:
+      - Street Market
+    put:
+      consumes:
+      - application/json
+      description: Update a Street Market by register code
+      parameters:
+      - description: Street Market
+        in: body
+        name: market
+        required: true
+        schema:
+          $ref: '#/definitions/model.StreetMarketDto'
+      - description: Street Market Register Code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/model.StreetMarketDto'
+        "400":
+          description: Invalid Request
+      summary: Update a Street Market by register code
+      tags:
+      - Street Market
+swagger: "2.0"

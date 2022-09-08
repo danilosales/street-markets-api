@@ -1,0 +1,313 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/street-markets": {
+            "get": {
+                "description": "Search a Market by distrito, regiao5, nome or bairro",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Street Market"
+                ],
+                "summary": "Search a Street Market",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Street Market Distrito",
+                        "name": "distrito",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Street Market Regiao5",
+                        "name": "regiao5",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Street Market Name",
+                        "name": "nome",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Street Market Bairro",
+                        "name": "bairro",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.StreetMarket"
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Can not find a Street Market with parameters"
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a Street Market",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Street Market"
+                ],
+                "summary": "Create a Street Market",
+                "parameters": [
+                    {
+                        "description": "Street Market",
+                        "name": "market",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.StreetMarketDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/model.StreetMarketDto"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Request"
+                    }
+                }
+            }
+        },
+        "/street-markets/{code}": {
+            "get": {
+                "description": "Search a Market by register Code",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Street Market"
+                ],
+                "summary": "Get a Street Market by Register Code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Street Market Register Code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/model.StreetMarketDto"
+                        }
+                    },
+                    "404": {
+                        "description": "Can not find a Street Market with this Register Code"
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a Street Market by register code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Street Market"
+                ],
+                "summary": "Update a Street Market by register code",
+                "parameters": [
+                    {
+                        "description": "Street Market",
+                        "name": "market",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.StreetMarketDto"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Street Market Register Code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/model.StreetMarketDto"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Request"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a Market by register Code",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Street Market"
+                ],
+                "summary": "Delete a Street Market by Register Code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Street Market Register Code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/model.StreetMarketDto"
+                        }
+                    },
+                    "404": {
+                        "description": "Can not find a Street Market with this Register Code"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.StreetMarket": {
+            "type": "object",
+            "properties": {
+                "areap": {
+                    "type": "string"
+                },
+                "bairro": {
+                    "type": "string"
+                },
+                "coddist": {
+                    "type": "integer"
+                },
+                "codsubpref": {
+                    "type": "integer"
+                },
+                "distrito": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "lat": {
+                    "type": "string"
+                },
+                "logradouro": {
+                    "type": "string"
+                },
+                "long": {
+                    "type": "string"
+                },
+                "nomeFeira": {
+                    "type": "string"
+                },
+                "numero": {
+                    "type": "string"
+                },
+                "referencia": {
+                    "type": "string"
+                },
+                "regiao5": {
+                    "type": "string"
+                },
+                "regiao8": {
+                    "type": "string"
+                },
+                "registro": {
+                    "type": "string"
+                },
+                "setcens": {
+                    "type": "string"
+                },
+                "subprefe": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.StreetMarketDto": {
+            "type": "object",
+            "properties": {
+                "areap": {
+                    "type": "string"
+                },
+                "bairro": {
+                    "type": "string",
+                    "maxLength": 20
+                },
+                "coddist": {
+                    "type": "integer"
+                },
+                "codsubpref": {
+                    "type": "integer"
+                },
+                "distrito": {
+                    "type": "string"
+                },
+                "lat": {
+                    "type": "string"
+                },
+                "logradouro": {
+                    "type": "string"
+                },
+                "long": {
+                    "type": "string"
+                },
+                "nome_feira": {
+                    "type": "string"
+                },
+                "numero": {
+                    "type": "string",
+                    "maxLength": 5
+                },
+                "referencia": {
+                    "type": "string",
+                    "maxLength": 60
+                },
+                "regiao5": {
+                    "type": "string"
+                },
+                "regiao8": {
+                    "type": "string"
+                },
+                "registro": {
+                    "type": "string"
+                },
+                "setcens": {
+                    "type": "string"
+                },
+                "subprefe": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
