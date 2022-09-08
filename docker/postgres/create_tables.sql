@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+
 CREATE TABLE markets(
   id serial not null primary key,
   long varchar(10) not null,
@@ -5,16 +7,16 @@ CREATE TABLE markets(
   setcens varchar(15) not null,
   areap varchar(13) not null,
   coddist int not null,
-  distrito varchar(18) not null,
+  distrito citext not null,
   codsubpref int not null,
   subprefe varchar(25) not null,
-  regiao5 varchar(6) not null,
+  regiao5 citext not null,
   regiao8 varchar(7) not null,
-  nome_feira varchar(30) not null,
-  registro varchar(6) not null,
+  nome_feira citext not null,
+  registro varchar(6) not null UNIQUE,
   logradouro varchar(34) not null,
   numero varchar(5),
-  bairro varchar(20),
+  bairro citext,
   referencia varchar(60)
 );
 

@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,24 +9,24 @@ import (
 
 func TestValidStreetMarket(t *testing.T) {
 
-	market := StreetMarket{
-		Id: 1, Longitude: "-46550164", Latitude: "-23558733", SetorCensitario: "355030885000091",
+	market := StreetMarketDto{
+		Longitude: "-46550164", Latitude: "-23558733", SetorCensitario: "355030885000091",
 		AreaPonderacao: "3550308005040", CodigoDistrito: 87, Distrito: "VILA FORMOSA",
 		CodSubPrefeitura: 26, SubPrefeitura: "ARICANDUVA-FORMOSA-CARRAO", Regiao5: "Leste",
 		Regiao8: "Leste 1", NomeFeira: "VILA FORMOSA", Registro: "4041-0",
 		Logradouro: "RUA MARAGOJIPE", Numero: "S/N", Bairro: "VL FORMOSA", Referencia: "TV RUA PRETORIA",
 	}
 
-	err := Validate(&market)
+	err := market.Validate()
 
 	assert.Nil(t, err)
 
 }
 
 func TestFailWithBlankValues(t *testing.T) {
-	market := StreetMarket{}
+	market := StreetMarketDto{}
 
-	err := Validate(&market)
+	err := market.Validate()
 	errs := err.(validator.ErrorMap)
 	assert.Equal(t, validator.ErrZeroValue, errs["CodigoDistrito"][0])
 	assert.Equal(t, validator.ErrZeroValue, errs["Logradouro"][0])
@@ -46,8 +45,8 @@ func TestFailWithBlankValues(t *testing.T) {
 
 func TestFieldsWithSizeOverAllowed(t *testing.T) {
 
-	market := StreetMarket{
-		Id: 1, Longitude: "Lorem Ipsum is simply dummy text of the printing ",
+	market := StreetMarketDto{
+		Longitude:       "Lorem Ipsum is simply dummy text of the printing ",
 		Latitude:        "Lorem Ipsum is simply dummy text of the printing ",
 		SetorCensitario: "Lorem Ipsum is simply dummy text of the printing ",
 		AreaPonderacao:  "Lorem Ipsum is simply dummy text of the printing ", CodigoDistrito: 87,
@@ -63,10 +62,8 @@ func TestFieldsWithSizeOverAllowed(t *testing.T) {
 		Referencia: "Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text of the printing ",
 	}
 
-	err := Validate(&market)
-	fmt.Println(err)
+	err := market.Validate()
 	errs := err.(validator.ErrorMap)
-	fmt.Println(len(errs))
 
 	assert.Equal(t, validator.ErrMax, errs["Logradouro"][0])
 	assert.Equal(t, validator.ErrMax, errs["Longitude"][0])
