@@ -13,7 +13,7 @@ var (
 	DB *gorm.DB
 )
 
-func InitializeGorm(conf *config.DbConf, logger *logger.Logger) {
+func ConnectDatabase(conf *config.DbConf, logger *logger.Logger) {
 
 	connectionString := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable", conf.Host, conf.Username, conf.Password, conf.DbName, conf.Port)
 

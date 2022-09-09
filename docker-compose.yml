@@ -15,7 +15,7 @@ services:
     networks:
       - api-street-markets
 
-  pgadmin-compose:
+  pgadmin:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@teste.com"
@@ -25,7 +25,27 @@ services:
     depends_on:
       - postgres
     networks:
+      - api-street-markets
+
+  street-markets-api:
+    build:
+      context: .
+      dockerfile: ./build/Dockerfile
+    environment:
+      - DB_PORT=5432
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_NAME=street-markets
+      - GIN_MODE=release
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    networks:
       - api-street-markets  
+    command: /bin/sh -c 'while ! nc -z postgres 5432; do sleep 1; done; ./root/app;'
+    restart: always 
 
 networks:
   api-street-markets:

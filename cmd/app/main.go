@@ -15,7 +15,7 @@ func main() {
 
 	logger := lr.New(appConf.LogLevel)
 
-	database.InitializeGorm(&appConf.Db, logger)
+	database.ConnectDatabase(&appConf.Db, logger)
 
 	router := router.New(logger)
 
